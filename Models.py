@@ -27,7 +27,12 @@ class Course:
         print(f"Course {self.name} with code {self.id} - taught by Dr. {self.doctor}")
         print(f"Registered Students: {registered_students}")
 
-    
+    def view_assignments(self):
+        print(f"Course {self.name} with code {self.id} - taught by Dr. {self.doctor}")
+        for i, assignment in enumerate(self.assignments):
+            submission_status = "submitted" if assignment.id in assignment.submissions else "NOT submitted"
+            grade = assignment.grades.get(student.user_name, "NA")
+            print(f"Assignment {i + 1}: {submission_status} - {grade} / {assignment.id}")
 
     def __repr__(self) -> str:
         return f"Course {self.name} with code {self.id} - taught by Dr. {self.doctor}\nhas {len(self.assignments)} Assignments"
