@@ -20,7 +20,7 @@ def std_menu(student):
             student.view_mycourses()
             course_index = int(input("Which course do you want to view? "))
             course = student.courses[course_index-1]
-            course.view_assignments()
+            course.view_assignments(student=student)
             print(sub_st_opt)  # Display the sub-menu options
             
             sub_choice = input("Write your choice: ")
