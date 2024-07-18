@@ -160,6 +160,14 @@ class TA(User):
         self.courses = []
         self.invitations = []
 
+    def view_courses(self):
+        if self.courses:
+            print("Courses List : ")
+            for i , course in enumerate(self.courses,start=1):
+                print(f'{i} ). {course.name}')
+                
+        else : print("You have not assigned to any course yet")
+        
     def receive_invitation(self, doctor, course):
         invitation = (doctor, course)
         self.invitations.append(invitation)
