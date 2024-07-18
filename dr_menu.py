@@ -35,7 +35,7 @@ def doctor_menu(doctor):
             
             course = doctor.courses[course_index-1]
             
-            view_course_menu(course)
+            view_course_menu(course,doctor=doctor)
         
         
         
@@ -49,7 +49,7 @@ def doctor_menu(doctor):
     
     
     
-def view_course_menu(course):
+def view_course_menu(course,doctor):
     while True:
         print(f"Course {course.name} Menu:")
         print("1. List Assignments")
@@ -64,8 +64,7 @@ def view_course_menu(course):
         elif choice == "2":
             assignment_id = input("Assignment ID: ")
             description = input("Description: ")
-            assignment = Assignment(assignment_id, description)
-            course.add_assignment(assignment)
+            doctor.create_assignment(course_id=course.id,assignment_id=assignment_id,description=description)
             print(f"Assignment {assignment_id} created successfully.")
         elif choice == "3":
             course.list_assignments()
