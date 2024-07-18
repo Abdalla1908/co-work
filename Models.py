@@ -1,6 +1,3 @@
-from users import *
-
-
 class Course:
     def __init__(self, name: str, id: str, doctor: str) -> None:
         self.name = name

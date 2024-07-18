@@ -1,8 +1,7 @@
-from users import *
 from Data import *
-from menu import *
 from models import *
-
+from users import Student
+ 
 def std_menu(student):
     while True:
         print(st_opt)  # Display the main menu options

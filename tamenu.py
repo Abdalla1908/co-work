@@ -1,7 +1,6 @@
-from users import *
-from Data import *
-from models import *
-from menu import menu
+from users import TA
+from Data import ta_opt
+from models import Course, Assignment
 
 def ta_menu(ta):
     while True:

@@ -1,5 +1,4 @@
-from auth import * 
-
+from auth import *
 
 class menu:
     def __init__(self) -> None:
@@ -9,6 +8,7 @@ class menu:
         print('choose from the list :')
         print('Sign in -> write "1"')
         print('sign up -> write "2" ')
+        print("Shut Down -> 3")
         
         choice = input('what is your choice : ')
         
@@ -24,3 +24,8 @@ class menu:
             print("invalid choice")
             
             
+    
+            
+            
+if __name__ == "__main__":
+    menu().display_menu()

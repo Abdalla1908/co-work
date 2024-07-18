@@ -1,11 +1,16 @@
-from users import *
-from models import *
+from studentmenu import std_menu
+from users import User,Student,TA,Doctor
+from dr_menu import doctor_menu,view_course_menu,view_assignment_menu
+from tamenu import ta_menu , invitations_menu
+
 
 class authcontrol :
     def __init__(self) -> None:
         self.users    = []
         self.username = []
+    
     def sign_up(self):
+        
         username  = input("Enter your user name : ")
         
         password  = input("Enter your Password : ")
@@ -14,10 +19,24 @@ class authcontrol :
         role      = input('what is your role { Student , Doctor or TA } : ')
         
         if username not in self.username :
-            user = User(username,password,full_name,email,role)
-            self.users.append(user)
-            print('User signed up sucessfuly')
-            self.sign_in()
+            if role.lower() == "student" :
+                user = Student(username,password,full_name,email,role)
+                self.users.append(user)
+                print('User signed up sucessfuly')
+                self.sign_in()
+        
+            elif role.lower() == 'doctor' :
+                    user = Doctor(username,password,full_name,email,role)
+                    self.users.append(user)
+                    print('User signed up sucessfuly')
+                    self.sign_in()
+            elif role.lower() == 'ta' :
+                    user = TA(username,password,full_name,email,role)
+                    self.users.append(user)
+                    print('User signed up sucessfuly')
+                    self.sign_in()    
+            
+            
         else :
             print("User name is used by another one try with a different username")
         
@@ -29,16 +48,17 @@ class authcontrol :
         role     = input('what is your role { Student , Doctor or TA } : ')
         
         for user in self.users:
-            if user.name == username and user.password == password and user.role == role :
-                print(f'Welcome {user.fullname}')
+            if user.user_name == username and user.password == password and user.role == role :
+                print(f'Welcome {user.full_name}')
+                if role.lower() == "student" :
+                    std_menu(user)
+                elif role.lower() == 'doctor' :
+                    doctor_menu(user)
+                elif role.lower() == 'ta' :
+                    ta_menu(user)
                 return
         print('invalid input data , chaeck your signin info')
         
-        if role.lower() == "student" :
-            pass
-        elif role.lower() == 'doctor' :
-            pass
-        elif role.lower() == 'ta' :
-            pass
+        
         
         

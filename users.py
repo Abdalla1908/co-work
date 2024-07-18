@@ -1,8 +1,5 @@
-from models import *
-
-
-from models import Course,Assignment
-import re
+from models import Course , Assignment
+import re 
 
 class User:
     counter_id = 41220001

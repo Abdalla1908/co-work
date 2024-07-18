@@ -1,7 +1,6 @@
+from Data import dr_opt,assignment_opt
+from models import Course,Assignment
 from users import Doctor
-from Data import *
-from menu import menu
-from models import * 
 
 
 def doctor_menu(doctor):
