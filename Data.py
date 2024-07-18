@@ -32,9 +32,9 @@ assignment_opt = """
 5. Back
 """
 ta_opt = """ 
-1.)Show courses
+1).Show courses
 2).Invetations
-3).ask for a course
+3). Create Assignmenr
 4).Log out
 """
 menu_opt = """
