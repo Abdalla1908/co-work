@@ -26,8 +26,18 @@ class Course:
         registered_students = ", ".join(student.full_name for student in self.students)
         print(f"Course {self.name} with code {self.id} - taught by Dr. {self.doctor}")
         print(f"Registered Students: {registered_students}")
+        
+    def list_assignments(self):
+        if self.assignments:
+            print("Assignments List :")
+            for i, assignment in enumerate(self.assignments,start=1):
+                print(f"{i} ). {assignment.id}")
+                
+        else:
+            print("No assignments in this course")
+            
 
-    def view_assignments(self):
+    def view_student_assignments(self,student):
         print(f"Course {self.name} with code {self.id} - taught by Dr. {self.doctor}")
         for i, assignment in enumerate(self.assignments):
             submission_status = "submitted" if assignment.id in assignment.submissions else "NOT submitted"
