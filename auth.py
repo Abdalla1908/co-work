@@ -18,6 +18,10 @@ class authcontrol :
         email     = input("Enter your valid email as (user@gmail.com) : ")
         role      = input('what is your role { Student , Doctor or TA } : ')
         
+        if not username :
+            print("User name can't be empty")
+            return
+        
         if username not in self.username :
             if role.lower() == "student" :
                 user = Student(username,password,full_name,email,role)
