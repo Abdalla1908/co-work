@@ -5,7 +5,7 @@ def menu():
     
     auth_control = load_data()
     
-    while True: 
+    while True:
         
             print('\nchoose from the list :')
             print('Sign in -> write "1"')
@@ -21,7 +21,7 @@ def menu():
                 auth_control.sign_up()
             elif choice == '3':
                 save_data(auth_control)
-                break
+                exit()
             
             else :
                 print("invalid choice")
