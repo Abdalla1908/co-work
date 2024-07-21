@@ -3,8 +3,24 @@ from users import User,Student,TA,Doctor
 from dr_menu import doctor_menu,view_course_menu,view_assignment_menu
 from tamenu import ta_menu , invitations_menu
 
+import pickle
+import os
 
-class authcontrol :
+Data_File = 'data.pkl'
+
+def save_data(auth_ctrl):
+    with open(Data_File,'wb') as file:
+        pickle.dump(auth_ctrl,file)
+        
+def load_data():
+    if os.path.exists(Data_File):
+        with open (Data_File,"rb") as file :
+            return pickle.load(file)
+    else:
+        return Authcontrol()
+        
+
+class Authcontrol :
     def __init__(self) -> None:
         self.users    = []
         self.username = []
@@ -26,17 +42,20 @@ class authcontrol :
             if role.lower() == "student" :
                 user = Student(username,password,full_name,email,role)
                 self.users.append(user)
+                save_data(self)
                 print('User signed up sucessfuly')
                 self.sign_in()
         
             elif role.lower() == 'doctor' :
                     user = Doctor(username,password,full_name,email,role)
                     self.users.append(user)
+                    save_data(self)
                     print('User signed up sucessfuly')
                     self.sign_in()
             elif role.lower() == 'ta' :
                     user = TA(username,password,full_name,email,role)
                     self.users.append(user)
+                    save_data(self)
                     print('User signed up sucessfuly')
                     self.sign_in()    
             
