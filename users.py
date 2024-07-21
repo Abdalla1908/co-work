@@ -14,6 +14,20 @@ class User:
         self.email = self.validate_email(email)
         self.role = role
 
+    def to_dict(self):
+        return {
+            "username": self.user_name,
+            "password": self.password,
+            "full_name": self.full_name,
+            "email": self.email,
+            "role": self.role
+        }
+
+    @classmethod
+    def from_dict(cls, data):
+        return cls(data["username"], data["password"], data["full_name"], data["email"], data["role"])
+
+    
     def validate_email(self, email: str) -> str:
         email_regex = r'^[a-zA-Z]+[a-zA-Z0-9._%+-]*@gmail\.com$'
         if not re.match(email_regex, email):
