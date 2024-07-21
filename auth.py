@@ -32,7 +32,7 @@ class Authcontrol :
         password  = input("Enter your Password : ")
         full_name = input("Enter your Full Name : ")
         email     = input("Enter your valid email as (user@gmail.com) : ")
-        role      = input('what is your role { Student , Doctor or TA } : ')
+        role      = input('what is your role { Student , Doctor or TA } : ').strip()
         
         if not username :
             print("User name can't be empty")
