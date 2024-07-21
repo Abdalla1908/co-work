@@ -1,3 +1,5 @@
+courses = []
+
 class Course:
     def __init__(self, name: str, id: str, doctor: str) -> None:
         self.name = name
@@ -6,6 +8,7 @@ class Course:
         self.assignments = []
         self.students = []
         self.ta = []
+        courses.append(self)
 
     def add_assignment(self, assignment) -> None:
         self.assignments.append(assignment)
@@ -41,10 +44,10 @@ class Course:
             grade = assignment.grades.get(student.user_name, "NA")
             print(f"Assignment {i + 1}: {submission_status} - {grade} / {assignment.id}")
 
-    def __repr__(self) -> str:
+    def info_(self) -> str:
         return f"Course {self.name} with code {self.id} - taught by Dr. {self.doctor}\nhas {len(self.assignments)} Assignments"
 
-
+assignments = []
 class Assignment:
     def __init__(self, id: str, description: str) -> None:
         self.id = id
@@ -52,6 +55,7 @@ class Assignment:
         self.submissions = {}
         self.grades = {}
         self.commits = {}
+        assignments.append(self)
 
     def submit(self, student, submission: str) -> None:
         self.submissions[student.user_name] = submission
@@ -70,5 +74,6 @@ class Assignment:
         else:
             print(f"No submission found for {student.full_name}")
 
-    def __str__(self) -> str:
+    def info(self) -> str:
         return f"Assignment(ID: {self.id}, Description: {self.description})"
+

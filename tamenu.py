@@ -1,9 +1,10 @@
 from users import TA
 from Data import ta_opt
 from models import Course, Assignment
+import auth
 
 
-def ta_menu(ta):
+def ta_menu(ta,auth_control):
     while True:
         print(ta_opt)
         choice = input("\nwrite your choice : ")
@@ -22,6 +23,7 @@ def ta_menu(ta):
             ta.create_assignment(course_id=course_id,assignment_id=assignment_id,description=description)
             
         elif choice == "4" :  # Log Out
+            auth.save_data(auth_control)
             from menu import menu
             menu()
             break  # Exit the loop and return to the main menu

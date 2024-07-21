@@ -1,5 +1,5 @@
-from auth import Authcontrol , load_data , save_data 
-
+from auth import Authcontrol , load_data , save_data
+import models
 
 def menu():
     
@@ -15,7 +15,7 @@ def menu():
             choice = input('what is your choice : ').strip()
         
             if   choice == '1':
-                auth_control.sign_in()
+                auth_control.sign_in(auth_control=auth_control)
             
             elif choice == '2':
                 auth_control.sign_up()

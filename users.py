@@ -1,4 +1,5 @@
-from models import Course , Assignment
+from models import Course , Assignment 
+import models
 import re 
 
 class User:
@@ -13,19 +14,6 @@ class User:
         self.full_name = full_name
         self.email = self.validate_email(email)
         self.role = role
-
-    def to_dict(self):
-        return {
-            "username": self.user_name,
-            "password": self.password,
-            "full_name": self.full_name,
-            "email": self.email,
-            "role": self.role
-        }
-
-    @classmethod
-    def from_dict(cls, data):
-        return cls(data["username"], data["password"], data["full_name"], data["email"], data["role"])
 
     
     def validate_email(self, email: str) -> str:
@@ -49,35 +37,23 @@ class Student(User):
         self.courses     = []
         
         
-    def to_dict(self):
-        return {
-            "username": self.user_name,
-            "password": self.password,
-            "full_name": self.full_name,
-            "email": self.email,
-            "role": self.role ,
-            "Courses" : [course for course in self.courses]
-        }
 
-    @classmethod
-    def from_dict(cls, data):
-        return cls(data["username"], data["password"], data["full_name"], data["email"], data["role"],data["Courses"])
-
-    
-    
-    
-    
-    
-    def register_course(self, course):
-        course.add_student(self)
-        self.courses.append(course)
-        print(f"Registered in course: {course.id}")
+    def register_course(self, course_name):
+        for course in models.courses :
+            if course.name == course_name:
+                
+                course.add_student(self)
+                self.courses.append(course)
+                print(f"Registered in course: {course.id}") 
         
-    def unregister_course(self,course):
-        course.students.pop(self)
-        self.courses.pop(course)
-        print('You have not been in course any more')
-
+    def unregister_course(self,course_name):
+        for course in self.courses :
+            if course.name == course_name:
+                
+                course.students.pop(self)
+                self.courses.pop(course)
+                print('You have not been in course any more')
+        
     def view_mycourses(self):
         if self.courses:
             for i, course in enumerate(self.courses, start=1):
@@ -124,26 +100,8 @@ class Doctor(User):
         super().__init__(user_name, password, full_name, email, role)
         self.courses = []
 
-    def to_dict(self):
-        return {
-            "username": self.user_name,
-            "password": self.password,
-            "full_name": self.full_name,
-            "email": self.email,
-            "role": self.role ,
-            "Courses" : [course for course in self.courses]
-        }
-
-    @classmethod
-    def from_dict(cls, data):
-        return cls(data["username"], data["password"], data["full_name"], data["email"], data["role"],data["Courses"])
-
-    
-    
-    
-    
     def create_course(self, course_name, course_id):
-        course = Course(name=course_name, id=course_id, doctor=self)
+        course  = Course(name=course_name, id=course_id, doctor=self)
         self.courses.append(course)
         print(f"Course {course_name} with ID {course_id} has been created successfully")
 
@@ -208,22 +166,6 @@ class TA(User):
         self.courses = []
         self.invitations = []
 
-    def to_dict(self):
-        return {
-            "username": self.user_name,
-            "password": self.password,
-            "full_name": self.full_name,
-            "email": self.email,
-            "role": self.role ,
-            "Courses" : [course for course in self.courses],
-            "Invitations":[invitation for invitation in self.invitations]
-        }
-
-    @classmethod
-    def from_dict(cls, data):
-        return cls(data["username"], data["password"], data["full_name"], data["email"], data["role"],data["Courses"],data["Invitations"])
-
-    
     def view_courses(self):
         if self.courses:
             print("Courses List : ")
@@ -279,4 +221,10 @@ class TA(User):
             return f"{super().__repr__()} Not assigned to any courses yet."
 
 
-                 
+"""doctor = Doctor("Dr. Smith",'1256','daj','sahg@gmail.com')
+doctor.create_course("AI", "AI101")
+doctor.create_course("ML", "ML102")
+
+for course in doctor.courses:
+    print(course)
+    #course.list_assignments()"""

@@ -1,10 +1,10 @@
 from Data import *
 from models import *
 from users import Student
+import auth
 
 
-
-def std_menu(student):
+def std_menu(student,auth_control):
     while True:
         print(st_opt)  # Display the main menu options
         
@@ -12,10 +12,16 @@ def std_menu(student):
         
         if choice == "1":
             course = input("What course do you want to register for? ")
+            for c in courses:
+                if c.name == course:
+                    break
+            else:
+                print("Invalid course name")
+                continue
             try:
                 student.register_course(course)
-            except :
-                print("Invalid course name")
+            except Exception as e:
+                print(f"Error registering course: {e}")
                 continue
         elif choice == '2':
             print("Courses list: ")
@@ -26,7 +32,7 @@ def std_menu(student):
             student.view_mycourses()
             course_index = int(input("Which course do you want to view? "))
             course = student.courses[course_index-1]
-            course.view_assignments(student=student)
+            course.view_student_assignments(student=student)
             print(sub_st_opt)  # Display the sub-menu options
             
             sub_choice = input("Write your choice: ").strip()
@@ -47,6 +53,7 @@ def std_menu(student):
                 for assignment_ in course_.assignments:
                     student.grades(course_id=course_.id, assignment_id=assignment_.id)
         elif choice == '5':  # log out
+            auth.save_data(auth_control)
             from menu import menu
             menu()
             break  # Exit the loop and return to the main menu
