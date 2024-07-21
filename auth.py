@@ -2,20 +2,33 @@ from studentmenu import std_menu
 from users import User,Student,TA,Doctor
 from dr_menu import doctor_menu,view_course_menu,view_assignment_menu
 from tamenu import ta_menu , invitations_menu
-
+from models import Course,Assignment ,courses,assignments
 import pickle
 import os
 
 Data_File = 'data.pkl'
+save_file = 'Data_l.pkl'
 
 def save_data(auth_ctrl):
-    with open(Data_File,'wb') as file:
-        pickle.dump(auth_ctrl,file)
+    with open(save_file,'wb') as file:
+        data = {"auth_control":auth_ctrl,
+                      "Courses" : courses,
+                      "Assignments" : assignments}
+        pickle.dump( data,file)
+        
         
 def load_data():
-    if os.path.exists(Data_File):
-        with open (Data_File,"rb") as file :
-            return pickle.load(file)
+    if os.path.exists(save_file):
+        with open (save_file,"rb") as file :
+            data = pickle.load(file)
+            print(data.get("auth_control"))
+            print(data.get("Courses"))
+            print(data.get("Assignments"))
+        auth_control    = data.get('auth_control')
+        courses         = data.get('Courses',[])
+        assignments     = data.get("Assignments",[])
+        
+        return auth_control
     else:
         return Authcontrol()
         
@@ -65,7 +78,7 @@ class Authcontrol :
         
         
         
-    def sign_in(self):
+    def sign_in(self,auth_control):
         username = input('Enter your user name : ')
         password = input("Enter your password : ")
         role     = input('what is your role { Student , Doctor or TA } : ')
@@ -74,11 +87,11 @@ class Authcontrol :
             if user.user_name == username and user.password == password and user.role == role :
                 print(f'Welcome {user.full_name}')
                 if role.lower() == "student" :
-                    std_menu(user)
+                    std_menu(user,auth_control)
                 elif role.lower() == 'doctor' :
-                    doctor_menu(user)
+                    doctor_menu(user,auth_control)
                 elif role.lower() == 'ta' :
-                    ta_menu(user)
+                    ta_menu(user,auth_control)
                 return
         print('invalid input data , chaeck your signin info')
         
