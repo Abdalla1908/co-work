@@ -33,8 +33,27 @@ class Student(User):
         super().__init__(user_name, password, full_name, email, role)
         
         self.courses     = []
-        self.assignments = []
         
+        
+    def to_dict(self):
+        return {
+            "username": self.user_name,
+            "password": self.password,
+            "full_name": self.full_name,
+            "email": self.email,
+            "role": self.role ,
+            "Courses" : [course for course in self.courses]
+        }
+
+    @classmethod
+    def from_dict(cls, data):
+        return cls(data["username"], data["password"], data["full_name"], data["email"], data["role"],data["Courses"])
+
+    
+    
+    
+    
+    
     def register_course(self, course):
         course.add_student(self)
         self.courses.append(course)
@@ -91,6 +110,24 @@ class Doctor(User):
         super().__init__(user_name, password, full_name, email, role)
         self.courses = []
 
+    def to_dict(self):
+        return {
+            "username": self.user_name,
+            "password": self.password,
+            "full_name": self.full_name,
+            "email": self.email,
+            "role": self.role ,
+            "Courses" : [course for course in self.courses]
+        }
+
+    @classmethod
+    def from_dict(cls, data):
+        return cls(data["username"], data["password"], data["full_name"], data["email"], data["role"],data["Courses"])
+
+    
+    
+    
+    
     def create_course(self, course_name, course_id):
         course = Course(name=course_name, id=course_id, doctor=self)
         self.courses.append(course)
@@ -157,6 +194,22 @@ class TA(User):
         self.courses = []
         self.invitations = []
 
+    def to_dict(self):
+        return {
+            "username": self.user_name,
+            "password": self.password,
+            "full_name": self.full_name,
+            "email": self.email,
+            "role": self.role ,
+            "Courses" : [course for course in self.courses],
+            "Invitations":[invitation for invitation in self.invitations]
+        }
+
+    @classmethod
+    def from_dict(cls, data):
+        return cls(data["username"], data["password"], data["full_name"], data["email"], data["role"],data["Courses"],data["Invitations"])
+
+    
     def view_courses(self):
         if self.courses:
             print("Courses List : ")
