@@ -1,7 +1,9 @@
 from Data import *
 from models import *
 from users import Student
- 
+import menu
+
+
 def std_menu(student):
     while True:
         print(st_opt)  # Display the main menu options
@@ -40,7 +42,7 @@ def std_menu(student):
                 for assignment_ in course_.assignments:
                     student.grades(course_id=course_.id, assignment_id=assignment_.id)
         elif choice == '5':  # log out
-            menu.display_menu()
+            menu.menu()
             break  # Exit the loop and return to the main menu
         else:
             print("Invalid choice")
