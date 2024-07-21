@@ -1,9 +1,11 @@
 from Data import dr_opt,assignment_opt
 from models import Course,Assignment
 from users import Doctor
+import auth
 
 
-def doctor_menu(doctor):
+
+def doctor_menu(doctor,auth_control):
     while True:
         print(dr_opt)
         
@@ -13,7 +15,7 @@ def doctor_menu(doctor):
             
             doctor.view_courses()
             
-            doctor_menu(doctor=doctor)
+            doctor_menu(doctor=doctor,auth_control=auth_control)
         
         elif choice == '2': #Create course
             
@@ -23,8 +25,8 @@ def doctor_menu(doctor):
         
             
             doctor.create_course(course_name=course_name,course_id=course_id)
-            
-            doctor_menu(doctor)
+
+
         
         elif choice == '3': # View course
             
@@ -39,8 +41,8 @@ def doctor_menu(doctor):
         
         
         elif choice == '4': # LOg Out
-            
-            from menu import menu
+            auth.save_data(auth_control)
+            from menu import menu 
             menu()
             break  # Exit the loop and return to the main menu
         
