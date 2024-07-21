@@ -1,31 +1,32 @@
 from auth import *
 
-class menu:
-    def __init__(self) -> None:
-        self.auth_ctrl = authcontrol()
+def menu():
     
-    def display_menu(self):
-        print('choose from the list :')
-        print('Sign in -> write "1"')
-        print('sign up -> write "2" ')
-        print("Shut Down -> 3")
+    auth_control = load_data()
+    
+    while True: 
         
-        choice = input('what is your choice : ')
+            print('\nchoose from the list :')
+            print('Sign in -> write "1"')
+            print('sign up -> write "2" ')
+            print("Shut Down -> 3")
         
-        if   choice == '1':
-            self.auth_ctrl.sign_in()
+            choice = input('what is your choice : ').strip()
+        
+            if   choice == '1':
+                auth_control.sign_in()
             
-        elif choice == '2':
-            self.auth_ctrl.sign_up()
-        elif choice == '3':
-            exit()
+            elif choice == '2':
+                auth_control.sign_up()
+            elif choice == '3':
+                save_data(auth_control)
+                break
             
-        else :
-            print("invalid choice")
+            else :
+                print("invalid choice")
             
             
     
             
             
-if __name__ == "__main__":
-    menu().display_menu()
+menu()
