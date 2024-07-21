@@ -1,7 +1,7 @@
 from users import TA
 from Data import ta_opt
 from models import Course, Assignment
-from menu import menu
+
 
 def ta_menu(ta):
     while True:
@@ -22,8 +22,9 @@ def ta_menu(ta):
             ta.create_assignment(course_id=course_id,assignment_id=assignment_id,description=description)
             
         elif choice == "4" :  # Log Out
+            from menu import menu
             menu()
-            break
+            break  # Exit the loop and return to the main menu
             
         else :
             print("Invalid Choice")

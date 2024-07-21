@@ -1,4 +1,5 @@
-from auth import *
+from auth import Authcontrol , load_data , save_data 
+
 
 def menu():
     

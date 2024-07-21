@@ -1,7 +1,7 @@
 from Data import dr_opt,assignment_opt
 from models import Course,Assignment
 from users import Doctor
-import menu
+
 
 def doctor_menu(doctor):
     while True:
@@ -40,8 +40,9 @@ def doctor_menu(doctor):
         
         elif choice == '4': # LOg Out
             
-            menu.menu()
-            break
+            from menu import menu
+            menu()
+            break  # Exit the loop and return to the main menu
         
         else : print("Invalid Choice") 
     
