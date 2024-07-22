@@ -18,7 +18,7 @@ def menu():
                 auth_control.sign_in(auth_control=auth_control)
             
             elif choice == '2':
-                auth_control.sign_up()
+                auth_control.sign_up(auth_control=auth_control)
             elif choice == '3':
                 save_data(auth_control)
                 exit()

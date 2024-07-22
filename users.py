@@ -39,7 +39,7 @@ class Student(User):
         
 
     def register_course(self, course_name):
-        for course in models.courses :
+        for course in Course.courses :
             if course.name == course_name:
                 
                 course.add_student(self)
