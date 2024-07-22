@@ -50,9 +50,10 @@ class Student(User):
         for course in self.courses :
             if course.name == course_name:
                 
-                course.students.pop(self)
-                self.courses.pop(course)
+                course.students.remove(self)
+                self.courses.remove(course)
                 print('You have not been in course any more')
+                return
         
     def view_mycourses(self):
         if self.courses:
