@@ -6,8 +6,8 @@ from models import Course,Assignment
 import pickle
 import os
 
-Data_File = 'data.pkl'
-save_file = 'Data_l.pkl'
+#Data_File = 'data.pkl'
+save_file = 'Data.pkl'
 
 def save_data(auth_ctrl):
     with open(save_file,'wb') as file:
@@ -38,7 +38,7 @@ class Authcontrol :
         self.users    = []
         self.username = []
     
-    def sign_up(self):
+    def sign_up(self,auth_control):
         
         username  = input("Enter your user name : ")
         
@@ -57,20 +57,20 @@ class Authcontrol :
                 self.users.append(user)
                 save_data(self)
                 print('User signed up sucessfuly')
-                self.sign_in()
+                self.sign_in(auth_control=auth_control)
         
             elif role.lower() == 'doctor' :
                     user = Doctor(username,password,full_name,email,role)
                     self.users.append(user)
                     save_data(self)
                     print('User signed up sucessfuly')
-                    self.sign_in()
+                    self.sign_in(auth_control=auth_control)
             elif role.lower() == 'ta' :
                     user = TA(username,password,full_name,email,role)
                     self.users.append(user)
                     save_data(self)
                     print('User signed up sucessfuly')
-                    self.sign_in()    
+                    self.sign_in(auth_control=auth_control)    
             
             
         else :
