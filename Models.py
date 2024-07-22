@@ -1,6 +1,7 @@
-courses = []
+
 
 class Course:
+    courses = []
     def __init__(self, name: str, id: str, doctor: str) -> None:
         self.name = name
         self.id = id
@@ -8,7 +9,7 @@ class Course:
         self.assignments = []
         self.students = []
         self.ta = []
-        courses.append(self)
+        Course.courses.append(self)
 
     def add_assignment(self, assignment) -> None:
         self.assignments.append(assignment)
@@ -47,15 +48,16 @@ class Course:
     def info_(self) -> str:
         return f"Course {self.name} with code {self.id} - taught by Dr. {self.doctor}\nhas {len(self.assignments)} Assignments"
 
-assignments = []
+
 class Assignment:
+    assignments = []
     def __init__(self, id: str, description: str) -> None:
         self.id = id
         self.description = description
         self.submissions = {}
         self.grades = {}
         self.commits = {}
-        assignments.append(self)
+        Assignment.assignments.append(self)
 
     def submit(self, student, submission: str) -> None:
         self.submissions[student.user_name] = submission
