@@ -12,7 +12,7 @@ def std_menu(student,auth_control):
         
         if choice == "1":
             course = input("What course do you want to register for? ")
-            for c in courses:
+            for c in Course.courses:
                 if c.name == course:
                     break
             else:
@@ -37,7 +37,10 @@ def std_menu(student,auth_control):
             
             sub_choice = input("Write your choice: ").strip()
             if sub_choice == "1":  # unregister from course
-                student.unregister_course(course)
+                try:
+                    student.unregister_course(course_name=course.name)
+                except Exception as e:
+                    print(f"Error : {e}")
             elif sub_choice == "2":  # submit solution
                 assignment_index = int(input("Which assignment do you want to submit? "))
                 assignment = course.assignments[assignment_index-1]
