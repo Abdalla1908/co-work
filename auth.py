@@ -2,7 +2,7 @@ from studentmenu import std_menu
 from users import User,Student,TA,Doctor
 from dr_menu import doctor_menu,view_course_menu,view_assignment_menu
 from tamenu import ta_menu , invitations_menu
-from models import Course,Assignment ,courses,assignments
+from models import Course,Assignment 
 import pickle
 import os
 
@@ -12,8 +12,8 @@ save_file = 'Data_l.pkl'
 def save_data(auth_ctrl):
     with open(save_file,'wb') as file:
         data = {"auth_control":auth_ctrl,
-                      "Courses" : courses,
-                      "Assignments" : assignments}
+                      "Courses" : Course.courses,
+                      "Assignments" : Assignment.assignments}
         pickle.dump( data,file)
         
         
@@ -25,8 +25,8 @@ def load_data():
             print(data.get("Courses"))
             print(data.get("Assignments"))
         auth_control    = data.get('auth_control')
-        courses         = data.get('Courses',[])
-        assignments     = data.get("Assignments",[])
+        Course.courses         = data.get('Courses',[])
+        Assignment.assignments     = data.get("Assignments",[])
         
         return auth_control
     else:
