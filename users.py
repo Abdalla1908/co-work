@@ -220,12 +220,3 @@ class TA(User):
             return f"{super().__repr__()} TA for {len(self.courses)} courses. Course List: {course_list}"
         else:
             return f"{super().__repr__()} Not assigned to any courses yet."
-
-
-"""doctor = Doctor("Dr. Smith",'1256','daj','sahg@gmail.com')
-doctor.create_course("AI", "AI101")
-doctor.create_course("ML", "ML102")
-
-for course in doctor.courses:
-    print(course)
-    #course.list_assignments()"""
